@@ -23,9 +23,9 @@ typedef struct HtmlNode {
   HtmlTags tag;
   char** classes;
   size_t classes_count;
-  Attribute* attributes;
+  Attribute** attributes;
   size_t attributes_count;
-  struct HtmlNode* children;
+  struct HtmlNode** children;
   // for text nodes NULL for everything else
   char* text;
 } HtmlNode;
