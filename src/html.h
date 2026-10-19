@@ -19,14 +19,28 @@ typedef struct Attribute {
   char* value;
 } Attribute;
 
-typedef struct HtmlNode {
+typedef struct HtmlComponentNode {
   HtmlTags tag;
   char** classes;
   size_t classes_count;
-  Attribute** attributes;
+  Attribute* attributes;
   size_t attributes_count;
-  struct HtmlNode** children;
-  // for text nodes NULL for everything else
+  struct HtmlComponentNode** children;
+  size_t children_count;
+} HtmlComponentNode;
+
+typedef struct HtmlTextNode {
   char* text;
+} HtmlTextNode;
+
+typedef enum HtmlNodeTypes { HTML_COMPONENT, HTML_TEXT };
+
+typedef struct HtmlNode {
+  HtmlNodeTypes type;
+  union {
+    HtmlComponentNode component;
+    HtmlTextNode text;
+  } data;
 } HtmlNode;
+
 #endif
